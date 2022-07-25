@@ -1,9 +1,9 @@
-export type Response = {
+export interface IResponse {
   count: number;
   next: string;
   previous: string;
   results: Person[];
-};
+}
 
 export type Person = {
   birth_year: string;
@@ -44,3 +44,26 @@ export type Starship = {
   starship_class: string;
   url: string;
 };
+
+export interface IPeopleProps {
+  peopleArray: Person[];
+}
+
+export interface IGame {
+  allCards: Person[] | Starship[];
+}
+
+export interface ICard {
+  name: string;
+  mass: string;
+}
+
+export interface IPlayer {
+  deck: Person[];
+  score: number;
+  cardNumber: number;
+  cardInfo: ICard;
+  showCard: boolean;
+  active: boolean;
+  win: boolean;
+}

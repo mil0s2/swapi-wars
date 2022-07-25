@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import shuffleAndDeal from 'src/utils/shuffleAndDeal';
-import { IPeopleProps, IPlayer } from '../../types';
+import { IGame, IPlayer } from '../../types';
 import Card from './Card';
 import Score from './Score';
 
@@ -14,7 +14,7 @@ const initialPlayerState = {
   win: false,
 };
 
-const People = ({ peopleArray }: IPeopleProps) => {
+const People = ({ allCards }: IGame) => {
   const [playerOne, setPlayerOne] = useState<IPlayer>(initialPlayerState);
   const [playerTwo, setPlayerTwo] = useState<IPlayer>(initialPlayerState);
 
@@ -24,10 +24,10 @@ const People = ({ peopleArray }: IPeopleProps) => {
   const isDeckLoaded = playerOne.deck.length > 0;
 
   useEffect(() => {
-    const [firstHalf, secondHalf] = shuffleAndDeal(peopleArray);
+    const [firstHalf, secondHalf] = shuffleAndDeal(allCards);
     setPlayerOne({ ...playerOne, deck: firstHalf });
     setPlayerTwo({ ...playerTwo, deck: secondHalf });
-  }, [peopleArray]);
+  }, [allCards]);
 
   useEffect(() => {
     if (

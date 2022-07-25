@@ -5,10 +5,10 @@ type ScoreType = {
 
 const Score = ({ name, score }: ScoreType) => {
   return (
-    <div className="flex flex-col items-center uppercase text-2xl">
+    <div className="flex flex-col gap-4 text-2xl uppercase">
+      {name}
       <div>
-        {name}
-        <div>SCORE: {score}</div>
+        SCORE: <span className="text-yellow-300">{score}</span>
       </div>
     </div>
   );
