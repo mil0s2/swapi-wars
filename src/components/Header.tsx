@@ -11,6 +11,7 @@ const Header = () => {
             color: isActive ? 'yellow' : '#fff',
             background: isActive ? 'gray' : '',
           })}
+          reloadDocument
         >
           People
         </NavLink>
@@ -21,6 +22,7 @@ const Header = () => {
             color: isActive ? 'yellow' : '#fff',
             background: isActive ? 'gray' : '',
           })}
+          reloadDocument
         >
           Starships
         </NavLink>

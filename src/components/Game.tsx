@@ -8,13 +8,13 @@ const initialPlayerState = {
   deck: [],
   score: 0,
   cardNumber: 0,
-  cardInfo: { name: '', mass: '' },
+  cardInfo: { name: '', value: '' },
   showCard: false,
   active: true,
   win: false,
 };
 
-const People = ({ allCards }: IGame) => {
+const Game = ({ allCards, cardImgBlue, cardImgRed, resetHref }: IGame) => {
   const [playerOne, setPlayerOne] = useState<IPlayer>(initialPlayerState);
   const [playerTwo, setPlayerTwo] = useState<IPlayer>(initialPlayerState);
 
@@ -47,15 +47,15 @@ const People = ({ allCards }: IGame) => {
         return { ...prev, active: false };
       });
       const timerShowWinner = setTimeout(() => {
-        const playerOneMassNumber = +playerOne.cardInfo.mass;
-        const playerTwoMassNumber = +playerTwo.cardInfo.mass;
+        const playerOneValueNumber = +playerOne.cardInfo.value;
+        const playerTwoValueNumber = +playerTwo.cardInfo.value;
 
-        if (playerOneMassNumber === playerTwoMassNumber) {
+        if (playerOneValueNumber === playerTwoValueNumber) {
           setDraw(true);
           return;
         }
 
-        playerOneMassNumber > playerTwoMassNumber
+        playerOneValueNumber > playerTwoValueNumber
           ? setPlayerOne((prev) => {
               return { ...prev, win: true, score: playerOne.score++ };
             })
@@ -72,6 +72,7 @@ const People = ({ allCards }: IGame) => {
         });
         setDraw(false);
       }, 2000);
+
       return () => {
         clearTimeout(timerFlipCards);
         clearTimeout(timerShowWinner);
@@ -100,6 +101,7 @@ const People = ({ allCards }: IGame) => {
             opponent={playerTwo}
             setOpponent={setPlayerTwo}
             loaded={isDeckLoaded}
+            cardImg={cardImgBlue}
           />
         </div>
         <div
@@ -120,6 +122,7 @@ const People = ({ allCards }: IGame) => {
             setPlayer={setPlayerTwo}
             setOpponent={setPlayerOne}
             loaded={isDeckLoaded}
+            cardImg={cardImgRed}
           />
         </div>
       </div>
@@ -128,7 +131,7 @@ const People = ({ allCards }: IGame) => {
           <div className="text-center text-5xl text-green-400">
             {winner + ' WINS'}
           </div>
-          <a href="/">
+          <a href={resetHref}>
             <button className="text-xl">Reset</button>
           </a>
         </div>
@@ -137,4 +140,4 @@ const People = ({ allCards }: IGame) => {
   );
 };
 
-export default People;
+export default Game;
