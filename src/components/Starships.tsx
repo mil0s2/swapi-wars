@@ -1,14 +1,18 @@
-import React from 'react';
+import useFetchPages from 'src/hooks/useFetch';
+import Game from './Game';
+
+const starshipsURL = 'https://swapi.dev/api/starships/?page=';
 
 const Starships = () => {
+  const starships = useFetchPages(starshipsURL);
+
   return (
-    <div className="h-full flex items-center">
-      <button>
-        <div className="border-4 hover:border-yellow-200 active:translate-y-[2px] border-yellow-400 rounded-lg px-12 py-6">
-          START
-        </div>
-      </button>
-    </div>
+    <Game
+      allCards={starships}
+      cardImgBlue="bg-ship-blue"
+      cardImgRed="bg-ship-red"
+      resetHref="/starships"
+    />
   );
 };
 

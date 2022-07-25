@@ -45,21 +45,20 @@ export type Starship = {
   url: string;
 };
 
-export interface IPeopleProps {
-  peopleArray: Person[];
-}
-
 export interface IGame {
   allCards: Person[] | Starship[];
+  cardImgBlue: string;
+  cardImgRed: string;
+  resetHref: string;
 }
 
 export interface ICard {
   name: string;
-  mass: string;
+  value: string;
 }
 
 export interface IPlayer {
-  deck: Person[];
+  deck: any[];
   score: number;
   cardNumber: number;
   cardInfo: ICard;

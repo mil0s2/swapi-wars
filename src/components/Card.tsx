@@ -7,6 +7,7 @@ interface CardProps {
   setPlayer: React.Dispatch<React.SetStateAction<IPlayer>>;
   setOpponent: React.Dispatch<React.SetStateAction<IPlayer>>;
   loaded?: boolean;
+  cardImg: string;
 }
 
 const Card = ({
@@ -15,6 +16,7 @@ const Card = ({
   opponent,
   setOpponent,
   loaded,
+  cardImg,
 }: CardProps) => {
   const flipCard = (
     setPlayer: React.Dispatch<React.SetStateAction<IPlayer>>,
@@ -30,8 +32,13 @@ const Card = ({
         showCard: true,
         cardInfo: {
           name: deck[cardNumber].name,
-          mass:
-            deck[cardNumber].mass === 'unknown' ? '50' : deck[cardNumber].mass,
+          value: deck[cardNumber].mass
+            ? deck[cardNumber].mass === 'unknown'
+              ? '50'
+              : deck[cardNumber].mass
+            : deck[cardNumber].crew === 'unknown'
+            ? '50'
+            : deck[cardNumber].crew,
         },
       };
     });
@@ -67,12 +74,12 @@ const Card = ({
         <div
           className={`${
             player.showCard ? 'rotate-y-0' : 'rotate-y-90'
-          }  absolute h-full w-full overflow-hidden rounded-lg border-4 border-cyan-300 bg-lightsaber bg-cover bg-no-repeat transition-all delay-200 ease-in`}
+          } ${cardImg} absolute h-full w-full overflow-hidden rounded-lg border-4 border-cyan-300 bg-cover bg-no-repeat transition-all delay-200 ease-in`}
         >
           <div className="flex h-full w-full flex-col items-center justify-center gap-14 bg-black/60 px-4">
             <div className="text-center text-xl">{player.cardInfo.name}</div>
-            <div className="text-7xl text-yellow-300">
-              {player.cardInfo.mass}
+            <div className="text-6xl text-yellow-300">
+              {player.cardInfo.value}
             </div>
           </div>
         </div>
